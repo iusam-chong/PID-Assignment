@@ -4,7 +4,7 @@ class Dbh {
     private $host = "localhost";
     private $user = "root";
     private $pwd = "root";
-    private $dbName = "Bank";
+    private $dbName = "cart";
 
     protected function connect() {
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;
@@ -27,6 +27,13 @@ class Dbh {
         $stmt->execute($param);
     }
 
+    protected function selectAll($query,$param) {
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute($param);
+
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }
 
 

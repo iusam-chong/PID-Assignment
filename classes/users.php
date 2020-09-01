@@ -2,12 +2,23 @@
 
 class Users extends Dbh {
 
+    # Method of check user is admin or not and return admin data
+    protected function isAdmin() {
+
+        $sql = "SELECT * FROM `user_sessions`, `users` 
+                WHERE (user_sessions.session_id = ?)
+                AND (user_sessions.user_id = users.user_id)
+                AND (users.user_type = ?)";
+        $param = array(session_id(),'admin');
+        $result = $this->select($sql, $param);
+
+        return $result;
+    }
+
     # Method to create a new user to db
     protected function createUser($data): bool {
-        
+    
         # do something check function here 
-        #
-        #
         #
         # maybe?
 
@@ -25,36 +36,7 @@ class Users extends Dbh {
         $this->insert($sql, $param);
         # End
 
-        # Start insert data into customer table
-        # get user_id use it relate customer table
-        $userId = $this->getId('user_id','users','user_name',$data->userName);
-
-        $sql = "INSERT INTO `customers` (`user_id`,`customer_name`,`customer_id_card`,`customer_phone_number`,`customer_email`) 
-                VALUES (?, ?, ?, ?, ?)";
-        $param = array($userId, $data->customerName, $data->customerIdCard, $data->customerPhoneNum, $data->customerEmail);
-        $this->insert($sql, $param);
-        # End
-
-        # Start insert data into account table
-        # get customer_id use it relate account table
-        $customerId = $this->getId('customer_id','customers','user_id',$userId);
-
-        $sql = "INSERT INTO `accounts` (`customer_id`) VALUES (?)";
-        $param = array($customerId);
-        $this->insert($sql, $param);
-        # End
-
         return TRUE;
-    }
-
-    # Method simple get id from table using condition
-    protected function getId($id,$table,$condition,$value) {
-
-        $sql = "SELECT $id FROM $table WHERE $condition = ?";
-        $param = array($value);
-        $row = $this->select($sql, $param);
-
-        return $row[$id];
     }
 
     # Find user using user_name, if exist return user data, else return value will be NULL
@@ -96,7 +78,7 @@ class Users extends Dbh {
             # Search conditions if set session from db 
             # And login haven't timeout and user still enabled
             $sql = "SELECT * FROM `user_sessions`, `users` WHERE (user_sessions.session_id = ?) 
-                    AND (user_sessions.login_time >= (NOW() - INTERVAL 3 MINUTE)) 
+                    AND (user_sessions.login_time >= (NOW() - INTERVAL 15 MINUTE)) 
                     AND (user_sessions.user_id = users.user_id) 
                     AND (users.user_enabled = 1)";
             $param = array(session_id());
@@ -138,6 +120,46 @@ class Users extends Dbh {
             $param = array(session_id());
             $this->insert($sql, $param);
         }
+    }
+
+    # Using session id to search customer name
+    protected function getCustomerName() {
+
+        $sql = "SELECT `customer_name` FROM `user_sessions`,`users`,`customers` 
+                WHERE (user_sessions.user_id = users.user_id) 
+                AND (users.user_id = customers.user_id) 
+                AND (session_id = ?)";
+        $param = array(session_id());
+        $result = $this->select($sql, $param);
+
+        return $result;
+    }
+
+    # Get All User value from table users
+    protected function getAllUser() {
+
+        $sql = "SELECT * FROM `users` WHERE `user_type` = ? ";
+        $param = array('user');
+        $result = $this->selectAll($sql, $param);
+
+        return $result;
+    }
+
+    protected function switchUserAuth($userId) {
+        
+        $sql = "SELECT * FROM `users` WHERE `user_id` = ? ";
+        $param = array($userId);
+        $result = $this->select($sql, $param);
+
+        $sql = "UPDATE `users` SET `user_enabled` = ? WHERE `user_id` = ?";
+        
+        if ($result['user_enabled'] < 1 ){
+            $param = array('1',$userId);
+        } else {
+            $param = array('0',$userId);
+        }
+
+        $this->insert($sql, $param);
     }
 
 }

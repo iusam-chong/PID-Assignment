@@ -1,0 +1,52 @@
+.btn-huge{
+    padding-top:40px;
+    padding-bottom:40px;
+    background-color: honeydew;
+    color: black;
+}
+/* 
+.btn:hover, .btn:focus {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn.disabled, .btn:disabled {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn:not(:disabled):not(.disabled) {
+cursor: pointer;
+} */
+
+/* CSS only for examples not required for centering */
+.container {
+    height: 100%;
+}
+
+.note {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 0;
+    padding: 5px;
+    background: #eee;
+    max-width: 360px;
+    border: none;
+}
+
+/* show border around full height container */
+.h-100 {
+    border:none;
+}
+
+html, body {
+    height: 100%;
+}

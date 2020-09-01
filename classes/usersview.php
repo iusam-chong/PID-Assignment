@@ -2,10 +2,10 @@
 
 class UsersView extends Users {
 
-    public function showUser() {
-        $result = $this->getUser();
-        echo "Full name: " . $result['user_name'];
-    }
+    // public function showUser() {
+    //     $result = $this->getUser();
+    //     echo "Full name: " . $result['user_name'];
+    // }
 
     public function loginPage($lgData) {
         $this->title = "登入";
@@ -32,10 +32,6 @@ class UsersView extends Users {
         $this->tempUserName      = $rgData->userName;
         $this->userPasswd        = $rgData->userPasswd;
         $this->userPasswdConfrim = $rgData->userPasswdConfrim;
-        $this->customerName      = $rgData->customerName;
-        $this->customerIdCard    = $rgData->customerIdCard;
-        $this->customerEmail     = $rgData->customerEmail;
-        $this->customerPhoneNum  = $rgData->customerPhoneNum;
         # Contruct END
 
         if (isset($rgData->message)) {
@@ -45,9 +41,24 @@ class UsersView extends Users {
         require_once('./views/register.page.php');
     }
 
-    public function mainPage() {
+    public function userMainPage() {
         $this->title = "首頁";
-        require_once('./views/main.page.php');
+        
+        require_once('./views/usermain.page.php');
+    }
+
+    public function adminMainPage() {
+        $this->title = "管理者首頁";
+        
+        require_once('./views/adminmain.page.php');
+    }
+
+    public function memberListPage() {
+        $this->title = "會員清單";
+
+        $result = $this->getAllUser();
+        
+        require_once('./views/memberlistpage.page.php');
     }
 }
 

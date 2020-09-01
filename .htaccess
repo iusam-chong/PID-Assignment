@@ -5,3 +5,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 #RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+ErrorDocument 404 "<H1>Page not found =(</H1>"

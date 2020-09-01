@@ -4,22 +4,13 @@ class Form {
     public $userName;
     public $userPasswd;
     public $userPasswdConfrim;
-    public $customerName;
-    public $customerIdCard;
-    public $customerEmail;
-    public $customerPhoneNum;
 
     public $message;
 
-    public function registerForm($userName,$userPasswd,$userPasswdConfrim,$customerName,$customerIdCard,$customerPhoneNum,$customerEmail) {
+    public function registerForm($userName,$userPasswd,$userPasswdConfrim) {
         $this->userName = $userName;
         $this->userPasswd = $userPasswd;
         $this->userPasswdConfrim = $userPasswdConfrim;
-        
-        $this->customerName = $customerName;
-        $this->customerIdCard = $customerIdCard;
-        $this->customerEmail = $customerEmail;
-        $this->customerPhoneNum = $customerPhoneNum;
     }
 
     public function loginForm($userName,$userPasswd) {
@@ -27,7 +18,7 @@ class Form {
         $this->userPasswd = $userPasswd;
     }
 
-    public function errorMessage($message) {
+    public function setMessage($message) {
         $this->message = $message;
     }
 
