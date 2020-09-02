@@ -1,11 +1,11 @@
 <?php
 
 class Form {
-    public $userName;
-    public $userPasswd;
-    public $userPasswdConfrim;
+    // public $userName;
+    // public $userPasswd;
+    // public $userPasswdConfrim;
 
-    public $message;
+    // public $message;
 
     public function registerForm($userName,$userPasswd,$userPasswdConfrim) {
         $this->userName = $userName;
@@ -46,6 +46,18 @@ class Form {
         }
 
         return TRUE;
+    }
+
+    public function setProduct($prodName,$prodPrice,$prodUnit,$prodDesc,$prodImg) {
+        $this->prodName = $prodName;
+        $this->prodPrice = $prodPrice;
+        $this->prodUnit = $prodUnit;
+        $this->prodDesc = $prodDesc;
+        $this->prodImg = $prodImg;
+    }
+
+    public function setProductId($prodId) {
+        $this->prodId = $prodId;
     }
 }
 

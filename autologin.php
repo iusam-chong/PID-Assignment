@@ -2,8 +2,10 @@
 
 $user = new UsersContr();
 
-if (!$user->autoLogin()) {
-    header('location: login');
-}
+$user->autoLogin();
+
+// if (!$user->autoLogin()) {
+//     header('location: login');
+// }
 
 ?>

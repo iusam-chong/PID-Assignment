@@ -24,7 +24,8 @@ class Dbh {
     # Query insert or delete can be use 
     protected function insert($query,$param) {
         $stmt = $this->connect()->prepare($query);
-        $stmt->execute($param);
+
+        return $stmt->execute($param) ? TRUE : FALSE ;
     }
 
     protected function selectAll($query,$param) {

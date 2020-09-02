@@ -25,7 +25,7 @@ require_once('header.page.php');
                 </div>
 
                 <div class="col-3">
-                    <a class="btn btn-info btn-lg btn-block btn-huge" style="display: flex; justify-content: center;" href="">商品管理</a>
+                    <a class="btn btn-info btn-lg btn-block btn-huge" style="display: flex; justify-content: center;" href="productmanage">商品管理</a>
                 </div>
 
                 <div class="col-3">

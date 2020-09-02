@@ -58,8 +58,9 @@ class UsersView extends Users {
 
         $result = $this->getAllUser();
         
-        require_once('./views/memberlistpage.page.php');
+        require_once('./views/adminmemberlist.page.php');
     }
+
 }
 
 ?>

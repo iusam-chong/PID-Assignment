@@ -5,12 +5,13 @@ require_once('./includes/class-autoload.php');
 # if exist user session, then go to main page
 
 $user = new UsersContr();
+header('location: main');
 
-if (!$user->autoLogin()) {
-    header('location: login');
-} else {
-    header('location: main');
-}
+// if (!$user->autoLogin()) {
+//     header('location: login');
+// } else {
+//     header('location: main');
+// }
 
 # test function
 // $rgData = new Form();
