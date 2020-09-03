@@ -9,8 +9,8 @@ require_once('header.page.php');
 
     <div class="container text-center">
     <div class="row h-75">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6 my-auto">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 my-auto">
             <h2>會員清單</h2>
             <hr>
                 <div class="row">

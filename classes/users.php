@@ -122,7 +122,7 @@ class Users extends Dbh {
         }
     }
 
-    # Using session id to search customer name
+    # Using session id to search customer name // maybe is bank assigment method xD
     protected function getCustomerName() {
 
         $sql = "SELECT `customer_name` FROM `user_sessions`,`users`,`customers` 
@@ -162,6 +162,17 @@ class Users extends Dbh {
         $this->insert($sql, $param);
     }
 
+    # Find user using session Id
+    protected function getUserDataBySession() {
+        
+        $sql = "SELECT * FROM `user_sessions`, `users` 
+                WHERE (user_sessions.user_id = users.user_id) 
+                AND (user_sessions.session_id = ? )";
+        $param = array(session_id());
+        $result = $this->select($sql, $param);
+
+        return $result;
+    }
 }
 
 ?>

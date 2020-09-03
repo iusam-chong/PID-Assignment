@@ -9,8 +9,8 @@ require_once('header.page.php');
 
     <div class="container text-center">
     <div class="row h-75">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6 my-auto">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 my-auto">
             <h2>商品管理 - 產品列表</h2>
             <hr>
             <form id="form" method="post" action=""></form>
@@ -23,7 +23,7 @@ require_once('header.page.php');
                 <form id="delete" method="post" action=""></form>
 
                 <?php foreach($data as $d) { ?>
-                <div class="card col-6">
+                <div class="card col-3">
                     <img class="card-img-top" src="<?='./uploads/'.$d['product_image'] ?>">
                     <div class="card-body">
                         <h5 class="card-title">ID:<?=$d['product_id'] ." ". $d['product_name']?></h5>
@@ -52,6 +52,13 @@ require_once('header.page.php');
 <?php
     require_once('script.page.php');
 ?>
+<script>
 
+// should do alert box when onclick delete btn
+$(document).ready(function() {
+
+});
+
+</script>
 </body>
 </html>

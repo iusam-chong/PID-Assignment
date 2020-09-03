@@ -26,7 +26,16 @@ require_once('header.page.php');
                 <button type="submit" class="btn btn-primary" value="1">奇妙登入</button>
             </form>
             <hr>
-            <a href="register">註冊賬號</a>
+            
+            <div class="row">
+                <div class="col-6">
+                    <a class="float-right" href="register">註冊賬號</a>
+                </div>
+                <div class="col-6">
+                    <a class="float-left" href="main">前往首頁</a>
+                </div>
+            </div>
+             
         </div>
     </div>
     </div>

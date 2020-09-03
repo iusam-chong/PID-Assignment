@@ -12,4 +12,9 @@ function myAutoLoader($className) {
 
 session_start();
 
+$user = new UsersContr();
+
+$user->autoLogin();
+
+
 ?>

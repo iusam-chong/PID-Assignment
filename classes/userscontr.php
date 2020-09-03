@@ -37,6 +37,12 @@ class UsersContr extends Users {
 
         $this->switchUserAuth($userId);
     }
+
+    public function getUserData() {
+
+        return $this->getUserDataBySession() ;
+    }
+
 }
 
 ?>

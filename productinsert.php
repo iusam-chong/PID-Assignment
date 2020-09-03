@@ -1,7 +1,6 @@
 <?php
 
 require_once('./includes/class-autoload.php');
-require_once('./autologin.php');
 
 $user = new UsersContr();
 
@@ -52,7 +51,8 @@ if(isset($_POST['newProduct'])) {
         exit();
     }
    
-    $insertData->setProduct($_POST['textProdName'],$_POST['textProdPrice'],$_POST['textProdUnit'],$_POST['textProdDesc'],$img);
+    $insertData->setProduct($_POST['textProdName'],$_POST['textProdPrice'],$_POST['textProdUnit'],$_POST['textProdDesc']);
+    $insertData->setProductImg($img);
 
     $product = new ProductsContr();
     if($product->uploadProduct($insertData)) {

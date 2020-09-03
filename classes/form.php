@@ -48,11 +48,14 @@ class Form {
         return TRUE;
     }
 
-    public function setProduct($prodName,$prodPrice,$prodUnit,$prodDesc,$prodImg) {
+    public function setProduct($prodName,$prodPrice,$prodUnit,$prodDesc) {
         $this->prodName = $prodName;
         $this->prodPrice = $prodPrice;
         $this->prodUnit = $prodUnit;
         $this->prodDesc = $prodDesc;
+    }
+
+    public function setProductImg($prodImg) {
         $this->prodImg = $prodImg;
     }
 

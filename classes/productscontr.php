@@ -14,6 +14,11 @@ class ProductsContr extends Products {
 
     }
 
+    public function offShelfProduct($productId) {
+
+        return $this->deleteProduct($productId) ? TRUE : FALSE ;
+
+    }
 
     public function getAllProduct() {
 
@@ -25,7 +30,20 @@ class ProductsContr extends Products {
         return $this->selectProduct($data);
     }
 
+    public function addToCart($productId) {
 
+        return $this->addProdToCart($productId);
+    }
+
+    public function cartUnit() {
+
+        return $this->findCartUnit();
+    }
+
+    public function getCartItem() {
+
+        return $this->getCart();
+    }
 
 }
 

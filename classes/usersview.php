@@ -29,9 +29,11 @@ class UsersView extends Users {
         $this->title = "註冊";
         $this->tips = "";
 
-        $this->tempUserName      = $rgData->userName;
-        $this->userPasswd        = $rgData->userPasswd;
-        $this->userPasswdConfrim = $rgData->userPasswdConfrim;
+        $this->tempUserName = "";
+        if(isset($rgData->userName)){
+            $this->tempUserName = $rgData->userName;
+        }
+       
         # Contruct END
 
         if (isset($rgData->message)) {
@@ -39,12 +41,6 @@ class UsersView extends Users {
         }
 
         require_once('./views/register.page.php');
-    }
-
-    public function userMainPage() {
-        $this->title = "首頁";
-        
-        require_once('./views/usermain.page.php');
     }
 
     public function adminMainPage() {
@@ -59,6 +55,18 @@ class UsersView extends Users {
         $result = $this->getAllUser();
         
         require_once('./views/adminmemberlist.page.php');
+    }
+
+    public function userMainPage($prodData,$userData,$cartUnit) {
+        $this->title = "首頁";
+
+        require_once('./views/usermain.page.php');
+    }
+
+    public function cartPage($userData,$cartUnit,$cartList) {
+        $this->title = "購物車";
+
+        require_once('./views/cart.page.php');
     }
 
 }

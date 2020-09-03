@@ -50,8 +50,6 @@ class ProductsView extends Products {
 
     public function productDeletePage() {
 
-        $this->title = "商品管理 - 刪除商品";
-
         //require_once('./views/adminproductdelete.page.php');
         require_once('./views/adminproductinsert.page.php');
     }

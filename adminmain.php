@@ -2,9 +2,11 @@
 
 require_once('./includes/class-autoload.php');
 
+
 $user = new UsersContr();
 
 $view = new UsersView();
+
 
 if(!$user->adminCheck()) {
 
@@ -12,12 +14,7 @@ if(!$user->adminCheck()) {
 
 }
 
-// if(isset($_POST['userId'])) {
-
-//     $user->setUserAuth($_POST['userId']);
-
-// }
-
-$view->productEditPage();
+$view->adminMainPage();
+      
 
 ?>

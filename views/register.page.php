@@ -12,7 +12,7 @@ require_once('header.page.php');
         <div class="col-sm-6 my-auto">
             <h2>奇妙網購註冊</h2>
             <hr>
-            
+       
             <form method="post" action="">
                 <div class="form-group">
                     <label>賬號</label>
@@ -21,12 +21,12 @@ require_once('header.page.php');
 
                 <div class="form-group">
                     <label>密碼</label>
-                    <input maxlength="16" type="password" class="form-control" id="textPassword" name="textPassword" required="required" pattern="[a-zA-Z0-9]{8,}" value="<?=$this->userPasswd?>">
+                    <input maxlength="16" type="password" class="form-control" id="textPassword" name="textPassword" required="required" pattern="[a-zA-Z0-9]{8,}">
                 </div>
 
                 <div class="form-group">
                     <label>密碼確認</label>
-                    <input maxlength="16" type="password" class="form-control" id="textConfirmPassword" name="textPasswordComfird" required="required" pattern="[a-zA-Z0-9]{8,}" value="<?=$this->userPasswdConfrim?>">
+                    <input maxlength="16" type="password" class="form-control" id="textConfirmPassword" name="textPasswordComfird" required="required" pattern="[a-zA-Z0-9]{8,}">
                 </div>
                 
                 <div class="form-group">
@@ -36,7 +36,16 @@ require_once('header.page.php');
             </form>
             
             <hr>
-            <a href="login">前往登入</a>    
+
+            <div class="row">
+                <div class="col-6">
+                    <a class="float-right" href="login">前往登入</a>
+                </div>
+                <div class="col-6">
+                    <a class="float-left" href="main">前往首頁</a>
+                </div>
+            </div>
+
         </div>
     </div>
     </div>
