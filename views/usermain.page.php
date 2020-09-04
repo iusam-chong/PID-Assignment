@@ -30,8 +30,8 @@ require_once('header.page.php');
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="#" class="btn btn-primary float-left" style="margin-right:5px;">回到首頁</a>
-                        <a href="#" class="btn btn-outline-primary float-left" style="margin-right:5px;">購買明細</a>
+                        <a href="#" class="btn btn-primary float-left" style="margin-right:5px;">首頁</a>
+                        <a href="statement" class="btn btn-outline-primary float-left" style="margin-right:5px;">購買明細</a>
                         <a href="cart" class="btn btn-outline-primary float-left">我的購物車($cartItemQuantity)</a>
                     </div>
                     
@@ -41,7 +41,7 @@ require_once('header.page.php');
                 $headerNotLogin = <<<notLogin
                 <div class="row d-flex align-items-center">
                     <div class="col-6">
-                        <a href="#" class="btn btn-primary float-left" style="margin-right:5px;">回到首頁</a>
+                        <a href="#" class="btn btn-primary float-left" style="margin-right:5px;">首頁</a>
                         <a href="cart" class="btn btn-outline-primary float-left">我的購物車($cartItemQuantity)</a>
                         
                     </div>

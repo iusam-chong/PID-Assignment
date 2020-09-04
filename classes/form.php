@@ -62,6 +62,12 @@ class Form {
     public function setProductId($prodId) {
         $this->prodId = $prodId;
     }
+
+    public function setBillList($prodId,$quantity) {
+        $this->prodId = $prodId;
+        $this->prodQuantity = $quantity;
+    }
+
 }
 
 ?>

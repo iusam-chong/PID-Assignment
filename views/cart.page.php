@@ -30,8 +30,8 @@ require_once('header.page.php');
 
                 <div class="row">
                     <div class="col-12">
-                        <a href="main" class="btn btn-outline-primary float-left" style="margin-right:5px;">回到首頁</a>
-                        <a href="#" class="btn btn-outline-primary float-left" style="margin-right:5px;">購買明細</a>
+                        <a href="main" class="btn btn-outline-primary float-left" style="margin-right:5px;">首頁</a>
+                        <a href="statement" class="btn btn-outline-primary float-left" style="margin-right:5px;">購買明細</a>
                         <a href="#" class="btn btn-primary float-left">我的購物車($cartItemQuantity)</a>
                     </div>
                     
@@ -41,7 +41,7 @@ require_once('header.page.php');
                 $headerNotLogin = <<<notLogin
                 <div class="row d-flex align-items-center">
                     <div class="col-6">
-                        <a href="main" class="btn btn-outline-primary float-left" style="margin-right:5px;">回到首頁</a>
+                        <a href="main" class="btn btn-outline-primary float-left" style="margin-right:5px;">首頁</a>
                         <a href="#" class="btn btn-primary float-left">我的購物車($cartItemQuantity)</a>
                     </div>
                     <div class="col-6">
@@ -59,44 +59,55 @@ require_once('header.page.php');
             ?>
             
             <div class="row">
-                    <div class="col-12">
+                <div class="col-12">
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col" colspan="2">產品</th>
+                                <th scope="col" colspan="3">產品</th>
                                 <th scope="col">價格</th>
                                 <th scope="col">數量</th>
                                 <th scope="col">小計</th>
-                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             
-                            <form id="form" method="post" action=""></form>
+                            <form id="delCart" method="post" action=""></form>
+                            <form id="bill" method="post" action=""></form>
 
-                            <?php foreach ($cartList as $list) { ?>
+                            <?php if(!empty($cartList)) {
+                                    
+                                    foreach ($cartList as $list) { ?>
                             <tr>
+                                <td style="vertical-align: middle;"><button  class="btn btn-danger" type="submit" form="delCart" name="delFromCart" value="<?=$list['product_id']?>">移除</button></td>
                                 <td><img style="width:100px;" class="card-img-top" src="<?='./uploads/'.$list['product_image'] ?>"></td>
                                 <td style="vertical-align: middle; text-align: left;"><?= $list['product_name']?></td>
                                 <td style="vertical-align: middle"><?= $list['unit_price']?></td>
                                 <td style="vertical-align: middle;">
-                                    <select class="form-control " name="quantity" style="width:70%; margin-left:30px;">
-                                    <?php for($i = 1 ; $i <= $list[unit_in_stock] ; $i++) { ?>
+                                    <select form="bill" class="form-control " name="quantity[]" style="width:70%; margin-left:30px;">
+                                    <?php for($i = 1 ; $i <= $list['unit_in_stock'] ; $i++) { ?>
                                         <option value="<?= $i?>" <?php if ($i == $list['quantity'])echo "selected";?>><?=$i?>
                                         </option>
                                     <?php } ?>
                                     </select>
                                 </td>
                                 <td style="vertical-align: middle"><?= $list['unit_price'] * $list['quantity'] ?></td>
+                                <input form="bill" type="hidden" name="productId[]" value="<?=$list['product_id'] ?>">
                             </tr>
-                            <?php } ?>
+                            <?php } }?>
+                            
                         </tbody>
                     </table>
-                    </div>
+                    <hr>
+
+                    <?php if(!empty($cartList)) {
+                        $bill = <<<bill
+                        <button  class="btn btn-success float-right" type="submit" form="bill" name="bill" value="1">購買</button>
+                        bill;
+                        echo $bill ;
+                    } ?>
+
                 </div>
-
-            <hr>
-
+            </div>
         </div>
     </div>
     </div>

@@ -26,10 +26,12 @@ class Products extends Dbh {
 
     protected function deleteProduct($id) {
 
-        $sql = "DELETE FROM `products` WHERE `product_id` = ? ";
+        $sql = "DELETE `products`,`carts` 
+                FROM `products` INNER JOIN `carts` ON (carts.product_id = products.product_id) 
+                WHERE (products.product_id = ?)";
         $param = array($id);
         $result = $this->insert($sql, $param);
-        
+
         return $result;
     }
 
@@ -114,6 +116,48 @@ class Products extends Dbh {
         $result = $this->selectAll($sql,$param);
 
         return $result;
+    }
+
+    protected function deleteFromCart($prodId) {
+
+        $row = $this->getUser();
+        $userId = $row['user_id'];
+
+        $sql = "DELETE FROM `carts` WHERE (`user_id` = ?) AND (`product_id` = ?)";
+        $param = array($userId,$prodId);
+        $result = $this->insert($sql, $param);
+
+        return $result;
+    }
+
+    protected function bill($data) {
+
+        $row = $this->getUser();
+        $userId = $row['user_id'];
+
+        foreach ($data as $d) {
+        
+            $sql = "INSERT INTO `statement` (`user_id`, `product_id`, `product_quantity`) 
+                    VALUES(?, ?, ?)";
+            $param = array($userId, $d->prodId, $d->prodQuantity);
+            $result = $this->insert($sql, $param);
+
+            $sql = "SELECT `unit_in_stock` FROM `products` WHERE (`product_id` = ?)";
+            $param = array($d->prodId);
+            $result = $this->select($sql,$param);
+            
+            $newStock = $result['unit_in_stock'] - $d->prodQuantity;
+
+            $sql = "UPDATE `products` SET `unit_in_stock` = ? WHERE `product_id` = ?";
+            $param = array($newStock, $d->prodId);
+            $result = $this->insert($sql,$param);
+
+            $sql = "DELETE FROM `carts` WHERE (`user_id` = ?)";
+            $param = array($userId);
+            $result = $this->insert($sql,$param);
+            
+        }
+        
     }
 }
 

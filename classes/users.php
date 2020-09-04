@@ -135,6 +135,15 @@ class Users extends Dbh {
         return $result;
     }
 
+    protected function getUserId() {
+
+        $sql = "SELECT `user_id` FROM `user_sessions` WHERE (session_id = ? )";
+        $param = array(session_id());
+        $row = $this->select($sql, $param);
+
+        return $row;
+    }
+
     # Get All User value from table users
     protected function getAllUser() {
 
@@ -173,6 +182,36 @@ class Users extends Dbh {
 
         return $result;
     }
+
+    # Get user statement 
+    protected function getUserStatement($timestamp) {
+
+        $row = $this->getUserId();
+        $userId = $row['user_id'];
+        
+        $sql = "SELECT p.product_image, p.product_name, p.unit_price ,s.product_quantity 
+                FROM statement AS s JOIN products AS p ON s.product_id = p.product_id 
+                WHERE s.user_id = ? AND s.statement_time = ?";
+        $param = array($userId,$timestamp);
+        $result = $this->selectAll($sql, $param);
+
+        // print_r($result);
+        // die();
+        return $result;
+    }
+
+    protected function getStatementTimeList() {
+
+        $row = $this->getUserId();
+        $userId = $row['user_id'];
+
+        $sql = "SELECT DISTINCT `statement_time` FROM `statement` WHERE `user_id` = ? ORDER BY statement_time DESC";
+        $param = array($userId);
+        $result = $this->selectAll($sql, $param);
+
+        return $result;
+    }
+
 }
 
 ?>

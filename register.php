@@ -49,7 +49,7 @@ function loginAfterSignup($n, $p){
     $lgData = new Form();
     $lgData->loginForm($n, $p);
     $user->userLogin($lgData);
-    header('location: main');
+    header('location: login');
     exit();
 
 }

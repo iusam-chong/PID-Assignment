@@ -17,7 +17,7 @@ require_once('header.page.php');
             <div class="row">
 
                 <div class="col-3">
-                    <a class="btn btn-info btn-lg btn-block btn-huge" style="display: flex; justify-content: center;" href="">訂單管理</a>
+                    <a class="btn btn-info btn-lg btn-block btn-huge" style="display: flex; justify-content: center;" href="adminstatementlist">訂單管理</a>
                 </div>
 
                 <div class="col-3">

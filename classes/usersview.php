@@ -69,6 +69,18 @@ class UsersView extends Users {
         require_once('./views/cart.page.php');
     }
 
+    public function statementPage($userData,$cartUnit,$cartList,$statement) {
+        $this->title = "購買明細";
+
+        require_once('./views/statement.page.php');
+    }
+
+    public function adminStatementListPage() {
+        $this->title = "用戶購買明細";
+
+        require_once('./views/adminstatementlist.page.php');
+    }
+
 }
 
 ?>

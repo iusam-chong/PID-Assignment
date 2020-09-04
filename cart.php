@@ -11,9 +11,49 @@ $cartUnit = 0;
 
 $loginStatus = $user->autoLogin();
 
-# Get product list
-//$productData = $product->getAllProduct();
+// unset($_SESSION['cart']);
 
+# Delete item from cart
+if (isset($_POST['delFromCart'])) {
+    $prodId = $_POST['delFromCart'];
+
+    if ($loginStatus) {
+
+        $product->removeCartItem($prodId);
+
+    } else {
+        if (isset($_SESSION['cart'])) {
+
+            $key = array_search($prodId,$_SESSION['cart']);
+            unset($_SESSION['cart'][$key]);
+    
+            if (empty($_SESSION['cart'])) {
+                unset($_SESSION['cart']);
+            }
+        }
+    }
+}
+
+# Billing
+if (isset($_POST['bill'])) {
+
+    if (!$loginStatus) {
+        header('location: login');
+    } else {
+
+        $quantity = $_POST['quantity'] ;
+        foreach ($_POST['productId'] as $key => $prodId) {
+            
+            $billData = new Form();
+            $billData->setBillList($prodId, $quantity[$key]);
+            $billList[] = $billData; 
+        }
+        $product->billing($billList);
+        header('location: main');
+    }
+}
+
+# Views taking data from session / db
 # If user logged in send user data to views
 if ($loginStatus) {
 
@@ -26,11 +66,19 @@ if ($loginStatus) {
 
 } else {
 
+    $cartList = NULL ;
+
     if (isset($_SESSION['cart'])) {
         $cartUnit = countSessionCart();
+
+        $index = 0;
+        foreach($_SESSION['cart'] as $arr) {
+            $cartList[] = $product->getProduct($arr);
+            $cartList[$index++]['quantity'] = 1;
+        }
     }
 
-    $view->cartPage(NULL,$cartUnit,NULL);
+    $view->cartPage(NULL,$cartUnit,$cartList);
 }
 
 function countSessionCart() {
