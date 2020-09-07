@@ -75,7 +75,7 @@ class UsersView extends Users {
         require_once('./views/statement.page.php');
     }
 
-    public function adminStatementListPage() {
+    public function adminStatementListPage($data) {
         $this->title = "用戶購買明細";
 
         require_once('./views/adminstatementlist.page.php');

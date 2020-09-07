@@ -12,6 +12,10 @@ class UsersContr extends Users {
         return $this->createUser($rgData) ? TRUE : FALSE;
     }
     
+    public function checkUserAuth($lgData) {
+        return $this->checkAuth($lgData) ? TRUE : FALSE;
+    }
+
     public function autoLogin() {
 
         return $this->sessionLogin() ? TRUE : FALSE;
@@ -57,6 +61,25 @@ class UsersContr extends Users {
             $row = $this->getUserStatement($time['statement_time']) ;
             $result[$time['statement_time']] = $row;
           
+        }
+        return $result;
+    }
+
+    public function getAllStatement() {
+        $data = $this->getAllUserStatement();
+        //print_r($data);
+
+        foreach ($data as $row) {
+            //echo $row['statement_time']." | ".$row['user_id']."<br>";
+            $createIndex = (object)["statement_time" => $row['statement_time'],
+                                    "user_id"        => $row['user_id'],
+                                    "user_name"      => $row['user_name'],
+                                    "data"           => NULL ];
+            $createIndex->data = (object)array((object)["product_image" => $row['product_image'],
+                                                        "product_name"  => $row['product_name'],
+                                                        "unit_price"    => $row['unit_price'],
+                                                        "product_quantity" => $row['product_quantity'] ]); 
+            $result[] = $createIndex;
         }
         return $result;
     }

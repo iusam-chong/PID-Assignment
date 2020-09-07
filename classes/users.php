@@ -49,6 +49,17 @@ class Users extends Dbh {
         return $row;
     }
 
+    protected function checkAuth($data) {
+        $result = $this->getUser($data->userName);
+        if (!$result) {
+            return FALSE;
+        }
+        $sql = "SELECT `user_enabled` FROM users WHERE `user_id` = ? AND `user_enabled` = ?";
+        $param = array($result['user_id'],1);
+        $row = $this->select($sql,$param);
+        return $row;
+    }
+
     # Method login
     protected function manualLogin($data): bool {
         
@@ -212,6 +223,17 @@ class Users extends Dbh {
         return $result;
     }
 
+    protected function getAllUserStatement() {
+
+        $sql = "SELECT u.user_name, s.statement_time, s.user_id, p.product_image, p.product_name, p.unit_price, s.product_quantity 
+                FROM statement AS s JOIN products AS p ON s.product_id = p.product_id 
+                            JOIN users AS u ON u.user_id = s.user_id 
+                ORDER BY statement_time DESC";
+        $param = array(NULL);
+        $result = $this->selectAll($sql,$param);
+
+        return $result;
+    }
 }
 
 ?>

@@ -7,14 +7,15 @@ $user = new UsersContr();
 
 $view = new UsersView();
 
-
 if(!$user->adminCheck()) {
 
     header('location: main');
 
 }
 
-$view->adminStatementListPage();
+$data = $user->getAllStatement();
+
+$view->adminStatementListPage($data);
       
 
 ?>
