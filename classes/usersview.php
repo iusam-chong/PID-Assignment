@@ -44,13 +44,13 @@ class UsersView extends Users {
     }
 
     public function adminMainPage() {
-        $this->title = "管理者首頁";
+        $this->title = "管理端頁面";
         
         require_once('./views/adminmain.page.php');
     }
 
     public function memberListPage() {
-        $this->title = "會員清單";
+        $this->title = "管理端頁面";
 
         $result = $this->getAllUser();
         
@@ -76,11 +76,16 @@ class UsersView extends Users {
     }
 
     public function adminStatementListPage($data) {
-        $this->title = "用戶購買明細";
+        $this->title = "管理端頁面";
 
         require_once('./views/adminstatementlist.page.php');
     }
 
+    public function adminChartPage($data,$btnFlag) {
+        $this->title = "管理端頁面";
+
+        require_once('./views/adminchart.page.php');
+    }
 }
 
 ?>

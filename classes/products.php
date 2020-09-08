@@ -32,6 +32,11 @@ class Products extends Dbh {
         $param = array($id);
         $result = $this->insert($sql, $param);
 
+        # code above got bug if no user cart have that product , cant delete it
+        $sql = "DELETE `products` FROM `products` WHERE (product_id = ?)";
+        $param = array($id);
+        $result = $this->insert($sql, $param);
+    
         return $result;
     }
 
@@ -156,8 +161,32 @@ class Products extends Dbh {
             $param = array($userId);
             $result = $this->insert($sql,$param);
             
-        }
-        
+        }   
+    }
+
+    protected function getSoldToday() {
+        $sql = "SELECT `product_name`, `unit_price`,SUM(`product_quantity`) AS 'total_quantity',SUM(product_quantity*unit_price) AS 'total_price' 
+                FROM statement, products WHERE statement.product_id = products.product_id 
+                AND DATE(statement_time) = CURDATE()
+                GROUP BY `product_name`,`unit_price` ORDER BY total_price DESC";
+
+        $param = array(NULL);
+        $result = $this->selectAll($sql,$param);
+
+        return $result;
+    }
+
+    protected function getSoldLastSevenDay() {
+
+        $sql = "SELECT `product_name`, `unit_price`,SUM(`product_quantity`) AS 'total_quantity',SUM(product_quantity*unit_price) AS 'total_price' 
+                FROM statement, products WHERE statement.product_id = products.product_id 
+                AND statement_time >= curdate() - INTERVAL DAYOFWEEK(curdate())+6 DAY 
+                AND statement_time < curdate() - INTERVAL DAYOFWEEK(curdate())-1 DAY 
+                GROUP BY `product_name`,`unit_price` ORDER BY total_price DESC";
+        $param = array(NULL);
+        $result = $this->selectAll($sql,$param);
+
+        return $result;
     }
 }
 

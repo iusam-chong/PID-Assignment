@@ -98,6 +98,16 @@ class ProductsContr extends Products {
         return $this->bill($data);
     }
 
+    public function soldToday() {
+
+        return $this->getSoldToday();
+    }
+
+    public function soldLastSevenDay() {
+
+        return $this->getSoldLastSevenDay();
+    }
+
 }
 
 ?>

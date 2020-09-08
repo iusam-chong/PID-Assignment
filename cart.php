@@ -49,7 +49,7 @@ if (isset($_POST['bill'])) {
             $billList[] = $billData; 
         }
         $product->billing($billList);
-        header('location: main');
+        header('location: statement');
     }
 }
 

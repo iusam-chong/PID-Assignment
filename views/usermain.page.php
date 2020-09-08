@@ -68,7 +68,7 @@ require_once('header.page.php');
                 <div class="card col-3">
                     <img class="card-img-top" src="<?='./uploads/'.$d['product_image'] ?>">
                     <div class="card-body">
-                        <h5 class="card-title">ID:<?=$d['product_id'] ." ". $d['product_name']?></h5>
+                        <h5 class="card-title"><?=$d['product_name']?></h5>
                         <table class="table">
                             <tr><td>價格:</td><td><?=$d['unit_price'] ?></td></tr>
                             <tr><td>庫存:</td><td><?=$d['unit_in_stock'] ?></td></tr>
